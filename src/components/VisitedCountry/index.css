@@ -1,0 +1,26 @@
+.visited-country-item {
+  width: 250px;
+  margin-right: 15px;
+  margin-bottom: 25px;
+}
+.country-flag {
+  width: 100%;
+  margin-bottom: 0px;
+}
+.name-and-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1f1f2f;
+  margin-top: 0px;
+  padding: 5px 10px 5px 10px;
+}
+.remove-button {
+  background-color: transparent;
+  color: #f8fafc;
+  border: 1px solid #94a3b8;
+  border-radius: 4px;
+  padding: 5px 10px 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
