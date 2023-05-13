@@ -1,11 +1,11 @@
 import './index.css'
 
 const ListItem = props => {
-  const {data, updateVisitedList} = props
+  const {data, addToVisitedList} = props
   const {id, name, isVisited} = data
 
   const onAdd = () => {
-    updateVisitedList(id)
+    addToVisitedList(id)
   }
 
   return (
