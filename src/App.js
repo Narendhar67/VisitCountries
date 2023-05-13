@@ -123,7 +123,7 @@ class App extends Component {
           <VisitedCountry
             data={each}
             key={each.id}
-            addToVisitedList={this.removeFromVisitedList}
+            removeFromVisitedList={this.removeFromVisitedList}
           />
         ))}
       </ul>

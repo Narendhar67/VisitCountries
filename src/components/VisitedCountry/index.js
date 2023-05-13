@@ -1,11 +1,11 @@
 import './index.css'
 
 const VisitedCountry = props => {
-  const {data, addToVisitedList} = props
+  const {data, removeFromVisitedList} = props
   const {id, imageUrl, name} = data
 
   const onRemove = () => {
-    addToVisitedList(id)
+    removeFromVisitedList(id)
   }
 
   return (
