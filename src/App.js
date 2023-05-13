@@ -94,7 +94,7 @@ class App extends Component {
     const Item = List[index]
     Item.isVisited = true
 
-    List.splice(index, 1, Item)
+    //   List.splice(index, 1, Item)
     this.setState(prevState => ({
       List,
       visitedList: [...prevState.visitedList, Item],
@@ -103,17 +103,15 @@ class App extends Component {
 
   removeFromVisitedList = id => {
     const {List} = this.state
-    const newList = [...List]
-    const index = newList.findIndex(each => each.id === id)
-    const Item = newList[index]
+    const index = List.findIndex(each => each.id === id)
+    const Item = List[index]
     Item.isVisited = false
 
-    newList.splice(index, 1, Item)
     this.setState(prevState => {
       const updatedVisitedList = prevState.visitedList.filter(
         each => each.id !== id,
       )
-      return {List: newList, visitedList: updatedVisitedList}
+      return {List, visitedList: updatedVisitedList}
     })
   }
 
