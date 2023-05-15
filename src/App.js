@@ -80,55 +80,32 @@ const initialCountriesList = [
   },
 ]
 
-const initialVisitedList = initialCountriesList.filter(
-  each => each.isVisited === true,
-)
-
 // Replace your code here
 class App extends Component {
-  state = {List: initialCountriesList, visitedList: initialVisitedList}
+  state = {List: initialCountriesList}
 
   addToVisitedList = id => {
-    const {List} = this.state
-    const index = List.findIndex(each => each.id === id)
-    const Item = List[index]
-    Item.isVisited = true
-
-    //   List.splice(index, 1, Item)
     this.setState(prevState => ({
-      List,
-      visitedList: [...prevState.visitedList, Item],
+      List: prevState.List.map(each => {
+        if (each.id === id) {
+          return {...each, isVisited: !each.isVisited}
+        }
+        return each
+      }),
     }))
   }
 
-  removeFromVisitedList = id => {
-    const {List} = this.state
-    const index = List.findIndex(each => each.id === id)
-    const Item = List[index]
-    Item.isVisited = false
-
-    this.setState(prevState => {
-      const updatedVisitedList = prevState.visitedList.filter(
-        each => each.id !== id,
-      )
-      return {List, visitedList: updatedVisitedList}
-    })
-  }
-
-  renderVisitedList = () => {
-    const {visitedList} = this.state
-    return (
-      <ul className="visited-list">
-        {visitedList.map(each => (
-          <VisitedCountry
-            data={each}
-            key={each.id}
-            removeFromVisitedList={this.removeFromVisitedList}
-          />
-        ))}
-      </ul>
-    )
-  }
+  renderVisitedList = visitedList => (
+    <ul className="visited-list">
+      {visitedList.map(each => (
+        <VisitedCountry
+          data={each}
+          key={each.id}
+          removeFromVisitedList={this.addToVisitedList}
+        />
+      ))}
+    </ul>
+  )
 
   renderNoVisitedCountries = () => (
     <div className="no-visited-countries">
@@ -137,8 +114,8 @@ class App extends Component {
   )
 
   render() {
-    const {List, visitedList} = this.state
-    //   const visitedList = List.some(each => each.isVisited === true)
+    const {List} = this.state
+    const visitedList = List.filter(each => each.isVisited === true)
 
     return (
       <div className="bg-container">
@@ -154,7 +131,7 @@ class App extends Component {
         </ul>
         <h1 className="heading1">Visited Countries</h1>
         {visitedList.length !== 0
-          ? this.renderVisitedList()
+          ? this.renderVisitedList(visitedList)
           : this.renderNoVisitedCountries()}
       </div>
     )
